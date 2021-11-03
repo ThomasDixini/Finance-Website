@@ -127,10 +127,12 @@ header h1 {
 /*TABLE ============================================*/
 
 #data-table{
+    display:block;
     width: 100%;
     border-spacing: 0 0.5rem;
-
     color: #969cb3;
+
+    overflow-x:auto;
 }
 
 table thead tr th:first-child,
@@ -196,4 +198,19 @@ footer {
     opacity: 0.6;
 
 
+}
+
+/* Responsive ==========================================*/
+
+@media (min-width: 800px) {
+
+    html {
+        font-size: 87.5%;
+    }
+
+    #balance {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+    }
 }
