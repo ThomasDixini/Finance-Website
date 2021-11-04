@@ -1,6 +1,9 @@
 /* GLOBAL ================================= */
 :root {
     --dark-blue: #363f5f;
+    --green: #1a881a;
+    --light-green: #3cb311;
+    --red: #e92929;
 }
 
 
@@ -51,18 +54,60 @@ h2 {
 /* Links & Buttons ======================================*/
 
 a {
-    color:#3cb311;
+    color: var(--light-green);
     text-decoration: none;
 }
 
 a:hover {
-    color:#1a881a;
+    color:var(--green);
+}
+
+button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+
+    color: white;
+
+    background: var(--green);
+
+    padding: 0;
+
+    border-radius: 0.25rem;
+
+    cursor: pointer;
+
+}
+
+button:hover {
+    background: var(--light-green);
 }
 
 .button.new {
     display: inline-block;
 
     margin-bottom: .8rem;
+}
+
+.button.cancel {
+    color: var(--red);
+    border: 2px var(--red) solid;
+
+    height: 50px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    opacity: 0.6;
+
+    border-radius: 0.25rem;
+
+}
+
+.button.cancel:hover {
+    opacity: 1;
 }
 
 /* HEADER ======================================*/
@@ -101,7 +146,7 @@ header h1 {
 }
 
 .card.total {
-    background: #3cb311;
+    background: var(--light-green);
     color: white;
     padding: 1.2rem 2rem;
     margin-bottom: 2rem;
@@ -214,8 +259,47 @@ td.date {
 .modal {
     background: #F0F2F3;
     padding: 2.4rem;
+    max-width: 500px;
+    width: 90%;
 }
 
+/* Form ==========================================*/
+
+#form {
+    max-width: 500px;
+}
+
+#form form h2 {
+    margin-top: 0;
+}
+
+input {
+    border: none;
+    border-radius: 0.2rem;
+
+    padding: .8rem;
+
+    width: 100%;
+}
+
+.input-group {
+    margin-top: 0.8rem;
+}
+
+.input-group small {
+    opacity: 0.4;
+}
+
+.input-group.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group.actions .button,
+.input-group.actions button {
+    width: 48%;
+}
 
 /* FOOTER ==========================================*/
 
