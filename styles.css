@@ -18,7 +18,7 @@ html {
 }
 
 body {
-    background: #f0f2f5;
+    background: #f1f1f1de;
     font-family: "Poppins","sans-serif";
     grid-template-columns: 50px 1fr 2fr;
 }
@@ -249,6 +249,8 @@ td.date {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    z-index: 999;
 }
 
 .modal-overlay.active {
@@ -261,6 +263,9 @@ td.date {
     padding: 2.4rem;
     max-width: 500px;
     width: 90%;
+
+    position: absolute;
+    z-index: 5;
 }
 
 /* Form ==========================================*/
