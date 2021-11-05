@@ -50,3 +50,33 @@ const Transaction = {
         // Entradas - Saídas
     },
 }
+
+const DOM = {
+
+    transactionsContainer:document.querySelector('#data-table tbody'),
+
+    addTransaction(transactions,index){
+        const tr = document.createElement('tr');
+        tr.innerHTML = DOM.innerHTMLTransaction(transactions);
+
+        DOM.transactionsContainer.appendChild(tr)
+    },
+    innerHTMLTransaction(transactions){
+        const html = `
+                
+                    <td class="description">${transactions.description}</td>
+                    <td class="expenses">${transactions.amount}</td>
+                    <td class="date">${transactions.date}</td>
+                    <td>
+                        <img src="./assets/minus.svg" alt="Remover transação">
+                    </td>
+                
+    `;
+        return html;
+    },
+}
+
+
+transactions.forEach(function(transaction){
+    DOM.addTransaction(transaction)
+})
