@@ -31,9 +31,15 @@ const transactions = [
         date: "04/11/2021"
     },
     {
-        id: 1,
+        id: 3,
         description: "Internet",
         amount: -20000,
+        date: "20/11/2021"
+    },
+    {
+        id: 4,
+        description: "Internet",
+        amount: 20000,
         date: "20/11/2021"
     },
 ]
@@ -41,13 +47,41 @@ const transactions = [
 
 const Transaction = {
     incomes() {
-        // Somar entradas
+        let income = 0;
+        
+        
+        transactions.forEach(transaction => {
+            if(transaction.amount > 0){
+                income += transaction.amount;
+
+            }
+            
+            
+        })
+
+        return (income);
     },
     expenses() {
-        // Somar saídas
+        let expense = 0;
+        
+        
+        transactions.forEach(transaction => {
+            if(transaction.amount < 0){
+                expense += transaction.amount;
+
+            }
+            
+            
+        })
+
+        return (expense);
     },
     total() {
-        // Entradas - Saídas
+        
+
+        return Transaction.incomes() + Transaction.expenses();
+
+        
     },
 }
 
@@ -79,6 +113,17 @@ const DOM = {
     `;
         return html;
     },
+    updateBalance () {
+        document
+            .getElementById('incomeDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.incomes())
+        document
+            .getElementById('expenseDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.expenses())
+        document
+            .getElementById('totalDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.total())
+    }
 }
 
 const Utils = {
@@ -102,3 +147,5 @@ const Utils = {
 transactions.forEach(function(transaction){
     DOM.addTransaction(transaction)
 })
+
+DOM.updateBalance()
