@@ -21,7 +21,7 @@ openModal() {
 
 
 const Transaction = {
-    all: transactions = [
+    all:  [
         {
             
             description: "Luz",
@@ -148,6 +148,19 @@ const DOM = {
 }
 
 const Utils = {
+
+    formatAmount(value){
+        value = Number(value) * 100;
+
+        return value
+    },
+
+    formatDate(date){
+        const splittedDate = date.split("-")                          
+
+        return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+    },
+
     formatCurrency(value){
         const signal = Number(value) < 0 ? "-" : "";
 
@@ -184,32 +197,61 @@ const Form = {
     validateFields(){
         const {description, amount, date} = Form.getValues()
 
-        if(description.trim() === "" || amount.trim() === "" || date.trim){
+        if(description.trim() === "" || amount.trim() === "" || date.trim === ""){
             throw new Error("Por favor, preencha todos os campos!!")
         }
         
     },
 
+    formatValues(){
+        let {description, amount, date} = Form.getValues()
+
+        amount = Utils.formatAmount(amount)
+
+        date = Utils.formatDate(date)
+
+        return {
+            description,
+            amount,
+            date
+        }
+    },
+
+    
+
+    clearTransaction(){
+        Form.description.value = ""
+        Form.amount.value = ""
+        Form.date.value = ""
+    },
+
     submit(event){
-       //event.preventDefault();
+        event.preventDefault()
 
 
-       try {
+       try{
+
+        
            
        
         // Verificar se todas as informações foram preenchidas
         Form.validateFields()
         // Formatar os dados para salvar
-        //Form.formatData()
+        const transaction = Form.formatValues()
         // Salvar
-        //Form.save()
+        Transaction.add(transaction)
         // Apagar os dados do formulário
+        Form.clearTransaction()
         // Modal feche
+        modal.exitModal()
         // Atualizar aplicação
-
+        console.log(transaction)
        }catch(error){
            alert(error.message)
        }
+        
+
+      
 
     }
 
@@ -239,11 +281,5 @@ const App = {
 
 App.init()
 
-Transaction.add({
-    id: 39,
-    description: "alo hello",
-    amount: 2000,
-    date: "21/02/2021"
 
-})
 
