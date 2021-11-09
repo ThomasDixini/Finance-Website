@@ -1,3 +1,3 @@
 # Finance-Website
 
-<img src="./"/> 
+<img src="./assets/Pagina-inicial.png"/> 
