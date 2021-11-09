@@ -17,40 +17,54 @@ openModal() {
 }
 
 
-const transactions = [
-    {
-        id: 1,
-        description: "Luz",
-        amount: -50000,
-        date: "21/01/2021"
-    },
-    {
-        id: 2,
-        description: "Website",
-        amount: 500000,
-        date: "04/11/2021"
-    },
-    {
-        id: 3,
-        description: "Internet",
-        amount: -20000,
-        date: "20/11/2021"
-    },
-    {
-        id: 4,
-        description: "Internet",
-        amount: 20000,
-        date: "20/11/2021"
-    },
-]
+
 
 
 const Transaction = {
+    all: transactions = [
+        {
+            
+            description: "Luz",
+            amount: -50000,
+            date: "21/01/2021"
+        },
+        {
+            
+            description: "Website",
+            amount: 500000,
+            date: "04/11/2021"
+        },
+        {
+            
+            description: "Internet",
+            amount: -20000,
+            date: "20/11/2021"
+        },
+        {
+            
+            description: "Televisão ",
+            amount: 20000,
+            date: "20/11/2021"
+        },
+    ],
+
+    add(transaction){
+        Transaction.all.push(transaction)
+
+        App.reload();
+    },
+
+    remove(index){
+        Transaction.all.splice(index,1)
+
+        App.reload();
+    },
+
     incomes() {
         let income = 0;
         
         
-        transactions.forEach(transaction => {
+        Transaction.all.forEach(transaction => {
             if(transaction.amount > 0){
                 income += transaction.amount;
 
@@ -61,11 +75,12 @@ const Transaction = {
 
         return (income);
     },
+
     expenses() {
         let expense = 0;
         
         
-        transactions.forEach(transaction => {
+        Transaction.all.forEach(transaction => {
             if(transaction.amount < 0){
                 expense += transaction.amount;
 
@@ -76,6 +91,7 @@ const Transaction = {
 
         return (expense);
     },
+
     total() {
         
 
@@ -83,6 +99,7 @@ const Transaction = {
 
         
     },
+
 }
 
 const DOM = {
@@ -123,6 +140,10 @@ const DOM = {
         document
             .getElementById('totalDisplay')
             .innerHTML = Utils.formatCurrency(Transaction.total())
+    },
+
+    clearTransactions() {
+        DOM.transactionsContainer.innerHTML = "";
     }
 }
 
@@ -143,9 +164,86 @@ const Utils = {
     }
 }
 
+const Form = {
+    
+    description: document.querySelector('input#description'),
+    amount: document.querySelector('input#amount'),
+    date: document.querySelector('input#date'),
 
-transactions.forEach(function(transaction){
-    DOM.addTransaction(transaction)
+    getValues(){
+        
+        return {
+            description: Form.description.value,
+            amount: Form.amount.value,
+            date: Form.date.value,
+        }
+    },
+
+    
+
+    validateFields(){
+        const {description, amount, date} = Form.getValues()
+
+        if(description.trim() === "" || amount.trim() === "" || date.trim){
+            throw new Error("Por favor, preencha todos os campos!!")
+        }
+        
+    },
+
+    submit(event){
+       //event.preventDefault();
+
+
+       try {
+           
+       
+        // Verificar se todas as informações foram preenchidas
+        Form.validateFields()
+        // Formatar os dados para salvar
+        //Form.formatData()
+        // Salvar
+        //Form.save()
+        // Apagar os dados do formulário
+        // Modal feche
+        // Atualizar aplicação
+
+       }catch(error){
+           alert(error.message)
+       }
+
+    }
+
+
+    
+}
+
+
+const App = {
+    init(){
+
+        Transaction.all.forEach(transaction =>{
+            DOM.addTransaction(transaction)
+        })
+        
+        DOM.updateBalance()
+    },
+
+    reload(){
+        DOM.clearTransactions();
+        App.init();
+    },
+
+}
+
+
+
+App.init()
+
+Transaction.add({
+    id: 39,
+    description: "alo hello",
+    amount: 2000,
+    date: "21/02/2021"
+
 })
 
-DOM.updateBalance()
